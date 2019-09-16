@@ -74,6 +74,9 @@ class TechDetailView(generic.DetailView):
 def references(request):
     return render(request, 'cereslibrary/references.html', context=None)
 
+def GISdata(request):
+    return render (request, 'cereslibrary/GISdata.html', context=None)
+
 
 from cereslibrary.forms import UserInputForm
 
@@ -135,8 +138,6 @@ def userinput(request):
     }
     
     return render (request, 'cereslibrary/user-input.html', context=context)
-
-
 
 def modeloutput(request):
     """View function for home page of site."""

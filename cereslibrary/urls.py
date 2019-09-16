@@ -16,6 +16,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('user-input/', views.userinput, name='userinput'),
+    path('GIS-data/', views.GISdata, name='GISdata'),
     path('model-output/', views.modeloutput, name='modeloutput'),
     path('design-output/', views.designoutput, name='designoutput'),
     path('indicators/', views.indicators, name='indicators'),
