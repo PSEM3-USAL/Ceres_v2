@@ -111,9 +111,24 @@ class UserInputForm(ModelForm):
             discount_rate = 7
         
         #discount_rate = self.cleaned_data
-        
 
         return discount_rate
+    
+    #def clean_AD_decision(self):
+        #AD_decision = self.cleaned_data['AD_decision'] # This step gets us the data "cleaned" and sanitized of potentially unsafe input using the default validators, and converted into the correct standard type for the data 
+               
+        #return AD_decision
+    
+    def clean_biogas_product(self):
+        biogas_product = self.cleaned_data['biogas_product'] # This step gets us the data "cleaned" and sanitized of potentially unsafe input using the default validators, and converted into the correct standard type for the data 
+        AD_decision = self.cleaned_data['AD_decision']
+        if AD_decision :
+            pass
+        else:
+            if biogas_product != 'None': # discount_rate <= 0:# | discount_rate == None:
+                msg = forms.ValidationError("If 'AD' not selected this field must be null")
+                self.add_error('biogas_product', msg)
+        return biogas_product
     
     #DEF, CUS = 'def', 'cus'
     
@@ -132,11 +147,13 @@ class UserInputForm(ModelForm):
     class Meta:
         model = UserInputData
         #fields = '__all__'
-        fields = ['facility_size', 'longitude', 'latitude', 'manure_composition','AD_decision', 'discharge_mode', 'customized_discount_rate', 'discount_rate']
+        fields = ['facility_size', 'longitude', 'latitude', 'manure_composition','AD_decision', 'discharge_mode', 'customized_discount_rate', 'discount_rate', 'biogas_product']
         
     #def __init__(self, *args, **kwargs):
-        #super(UserInputForm, self).__init__(*args, **kwargs)
-        #self.fields['discount_rate'] = custom_discount_rate
+        ##super(UserInputForm, self).__init__(*args, **kwargs)
+        #super().__init__(*args, **kwargs)
+        ##self.fields['discount_rate'] = custom_discount_rate
+        #self.fields['biogas_product'].queryset = custom_discount_rate
 
         #instance = getattr(self, 'custom_discount_rate', None)
         #if instance == 'def':

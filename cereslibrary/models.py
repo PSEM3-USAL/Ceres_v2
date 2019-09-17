@@ -91,6 +91,24 @@ class Tech(models.Model):
 
     #def __str__(self):
         #return self.value
+        
+#class Biogas_product_dropdown(models.Model):
+    #BIOGAS_PROD = (
+        #('Methane', 'Methane'),
+        #('Electricity', 'Electricity'),
+        #('None', 'None'),
+    #)
+    
+    #biogas_product = models.CharField(max_length=10,
+                            #choices = BIOGAS_PROD,
+                            #blank = True,
+                            ##default='direct',
+                            #help_text='Select the expected product obtained from biogas',
+                            #)
+    #def __str__(self):
+        #"""String for representing the Model object."""
+        #return self.title
+    
    
 class UserInputData(models.Model):
     facility_size = models.FloatField(default=0, help_text='Enter the number of animals of the facility')
@@ -136,6 +154,20 @@ class UserInputData(models.Model):
                             )
     
     AD_decision = models.BooleanField(default=True) #default=False, null=True
+    
+    BIOGAS_PROD = (
+        ('Methane', 'Methane'),
+        ('Electricity', 'Electricity'),
+        ('None', 'None'),
+    )
+    
+    biogas_product = models.CharField(max_length=20,
+                            choices = BIOGAS_PROD,
+                            blank = False,
+                            #default='direct',
+                            help_text="Select the expected product obtained from biogas. Only required if 'Customized discount rate' is selected.",
+                            )
+
     
     DISCHARGE = (
         ('direct', 'Directly in a waterbody'),

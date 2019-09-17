@@ -16,10 +16,13 @@ urlpatterns = [
 
 urlpatterns += [
     path('user-input/', views.userinput, name='userinput'),
-    path('GIS-data/', views.GISdata, name='GISdata'),
     path('model-output/', views.modeloutput, name='modeloutput'),
     path('design-output/', views.designoutput, name='designoutput'),
     path('indicators/', views.indicators, name='indicators'),
     path('economic-eval/', views.economic_eval, name='economic_eval'),
-    path('results-index/', views.resultsindex, name='resultsindex')
+    path('results-index/', views.resultsindex, name='resultsindex'),
+    path('GIS-data/', views.GISdata, name='GISdata'),
+    path('P-balance/', views.Pbalance, name='Pbalance'),
+    path('TSI/', views.TSI, name='TSI'),
+    path('P-soil/', views.Psoil, name='Psoil'),
 ]

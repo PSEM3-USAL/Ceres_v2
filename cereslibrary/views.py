@@ -77,6 +77,15 @@ def references(request):
 def GISdata(request):
     return render (request, 'cereslibrary/GISdata.html', context=None)
 
+def Pbalance(request):
+    return render (request, 'cereslibrary/maps/Pbalance.html', context=None)
+
+def TSI(request):
+    return render (request, 'cereslibrary/maps/TSI.html', context=None)
+
+def Psoil(request):
+    return render (request, 'cereslibrary/maps/Psoil.html', context=None)
+
 
 from cereslibrary.forms import UserInputForm
 
@@ -112,6 +121,7 @@ def userinput(request):
             
             UserInputData.facility_size = form.cleaned_data['facility_size']
             UserInputData.AD_decision = form.cleaned_data['AD_decision']
+            UserInputData.biogas_product = form.cleaned_data['biogas_product']
             UserInputData.latitude = form.cleaned_data['latitude']
             UserInputData.longitude = form.cleaned_data['longitude']
             UserInputData.discharge_mode = form.cleaned_data['discharge_mode']

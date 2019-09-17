@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8">
         <title>Ceres Project</title>
@@ -10,13 +11,57 @@
     </head>
     
     <body>
-        <h1>Technology selection</h1>
+    
+        <header class="container group">
+            <section class="logoinst_row">
+                <div class="logoinst_row">
+                    <div class="logoinst_column">
+                        <img id="EPAlogo" src="{% static 'images/EPAlogo.png' %}" alt="EPA logo" style="height:100px">
+                    </div>
+                    <div class="logoinst_column">
+                        <img id="USALlogo" src="{% static 'images/USALlogo.png' %}" alt="USAL logo" style="height:110px">
+                    </div>
+                </div>
+            </section>
             
-        <form action="" method="post">
-        {% csrf_token %}
-        <table>
-        {{ form.as_table }}
-        </table>
-        <input type="submit" value="Submit">
+            <h1 class="logo">Ceres project</h1>
+            
+            <nav class="nav">
+                <a href="mailto:emartinher@usal.es?subject=Ceres%20Project">Contact</a>
+            </nav>
+        </header>
+        
+        <section class="hero"> 
+            <div class="containerblue">
+                <h2>Concentrated feeding animal operation data</h2>
+<!--                <br/>
+                <p class="description" id="description">
+                        U.S. Environmental Protection Agency. <br/>
+                        University of Salamanca. <br/>-->
+                </div>
+        </section>
+            
+        
+        <section class="hero" style="text-align:left;"> 
+            <div class="containerdarkblue">   
+                <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                {{ form.as_table }}
+                </table>
+                <input type="submit" value="Submit">
+            </div>
+        </section>
+        
+        <footer class="primary-footer">
+            <div class="container group">
+                <small>US Environmental Protection Agency</small> <br/>
+                <small>University of Salamanca</small>
+                
+                <nav class="nav">
+                    <a href="mailto:emartinher@usal.es?subject=Ceres%20Project">Contact</a>
+                </nav>
+            </div>
+        </footer>
     </body>
 </html>
