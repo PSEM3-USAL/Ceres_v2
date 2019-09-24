@@ -46,8 +46,17 @@
             <div class="containerdarkblue">   
                 <form action="" method="post">
                 {% csrf_token %}
+                <h6>CAFO parameters</h6>
                 <table>
-                {{ form.as_table }}
+                {{ userinput_form.as_table }}
+                </table>
+                <h6>Anaerobic digestion parameters</h6>
+                <table>
+                {{ AD_userinput_form.as_table }}
+                </table>
+                <h6>Economic parameters</h6>
+                <table>
+                {{ economic_userinput_form.as_table }}
                 </table>
                 <input type="submit" value="Submit">
             </div>

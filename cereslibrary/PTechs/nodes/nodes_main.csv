@@ -2,6 +2,14 @@ Src1_ConsistencyEval
 ConsistencyEval_ADEval
 ADEval_SLSepEval
 ADEval_Biogas
+Biogas_Purification
+Purification_Sink1Wa
+Purification_Sink2H2S
+Purification_Sink3Wa
+Purification_Biogas
+Purification_Sink5exhaust
+Biogas_TurbGas
+Biogas_Biomethane
 SLSepEval_LiqTreatment
 SLSepEval_SolidTreatment
 SLSepEval_SolidTreatment

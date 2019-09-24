@@ -26,13 +26,13 @@ Created on Wed Dec 19 09:15:46 2018
 
 #pd.options.display.max_columns = 50
 ##F_ini=0.12683916793505834
-def PROC_module(F_ini,fc_ini,x_ini):
+def PROC_module(F_ini,fc_ini,x_ini,elements_wet, elements_dry, nutrients, feedstock_parameters):
     import pandas as pd
     import numpy as np
     
     # IMPORT MODULES
     from global_parameters_module import UnitConv, MW, c_p_liq_sol, dH_vap_0, Tc, Tb, dH_f, dH_c, c_p_v_1, c_p_v_2, c_p_v_3, c_p_v_4, coef_vapor_pressure_1, coef_vapor_pressure_2, coef_vapor_pressure_3, CEI, price, nu_p, k_p, n_watson, epsilon, T_amb, P_ref, density
-    from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
+    #from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
     from equipment_costs.CSTR_cost_module import CSTR_investment_cost
     from equipment_costs.BeltFilt_design_cost import BeltFilt_design_cost
     from equipment_costs.ConveyorDryer_design_cost import ConveyorDryer_design_cost
@@ -267,7 +267,7 @@ def PROC_module(F_ini,fc_ini,x_ini):
     
     #-------------------------CSTR cost----------------------------------
     mixing_operation='Slurries' #Operation types: 'Blending','Homogeneous reaction','Reaction with heat transfer','Liquid-liquid mixtures','Liquid-gas mixtures','Slurries'
-    CSTR_results = CSTR_investment_cost (F_ini, total_time, mixing_operation)
+    CSTR_results = CSTR_investment_cost (F_ini, total_time, mixing_operation,feedstock_parameters)
     
     CSTR_V = CSTR_results['reactor_V']
     CSTR_D = CSTR_results['reactor_D']
@@ -280,7 +280,7 @@ def PROC_module(F_ini,fc_ini,x_ini):
     
     #-------------------------Clarifier----------------------------------
     HRT = 3600 #s
-    Clarifier_results = vessel_design_cost(F["PROC_Sedimentator"], HRT)
+    Clarifier_results = vessel_design_cost(F["PROC_Sedimentator"], HRT,feedstock_parameters)
     
     Clarifier_V_total = Clarifier_results['Volume']
     #Results

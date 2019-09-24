@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-def vessel_design_cost (F_total, residence_time):
+def vessel_design_cost (F_total, residence_time,feedstock_parameters):
     from global_parameters_module import UnitConv, MW, c_p_liq_sol, dH_vap_0, Tc, Tb, dH_f, dH_c, c_p_v_1, c_p_v_2, c_p_v_3, c_p_v_4, coef_vapor_pressure_1, coef_vapor_pressure_2, coef_vapor_pressure_3, CEI, price, nu_p, k_p, n_watson, epsilon, T_amb, P_ref, density, latent_heat_evap, nat_gas_heat_value
-    from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
+    #from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
 
     #PARAMETERS
     #Vessel parameters
@@ -26,7 +26,7 @@ def vessel_design_cost (F_total, residence_time):
         n_vessels  = np.ceil(Volume/max_size)
 
     #D_design = ((6*V_design)/(7*np.pi))**(1/3) #m for L=4D
-    D_design = ((4*V_design)/(1.2*np.pi))**(1/3) #m for L=1.2D
+    D_design = ((4*float(V_design))/(1.2*np.pi))**(1/3) #m for L=1.2D
     L_design = 1.2*D_design #m Fluid dynamic concepts for a phosphate precipitation reactor design. D. Mangin and J.P. Klein. Phosphorus in Environmental Technology Principles and Applications Valsami-Jones
     e = 0.0023+0.003*D_design #m Martin and Almena 2016
     Weight = SS_316_density/UnitConv['L_to_m3']*(np.pi*(((D_design/2)+e)**2-(D_design/2)**2)*L_design+(4/3)*np.pi*(((D_design/2)+e)**3-(D_design/2)**3)) #kg Martin and Almena 2016

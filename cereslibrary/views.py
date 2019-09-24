@@ -16,7 +16,7 @@ pd.set_option('display.float_format', '{:.2E}'.format)
 
 # Create your views here.
 
-from cereslibrary.models import Tech, UserInputData#, Product
+from cereslibrary.models import Tech, UserInputData, AD_UserInputData, Economic_UserInputData#, Product
 from cereslibrary.techmodels.economic_parameters_module import ec_param
 
 def index(request):
@@ -87,7 +87,7 @@ def Psoil(request):
     return render (request, 'cereslibrary/maps/Psoil.html', context=None)
 
 
-from cereslibrary.forms import UserInputForm
+from cereslibrary.forms import UserInputForm, AD_UserInputForm, Economic_UserInputForm
 
 import os, sys, inspect
 # Use this if you want to include modules from a subfolder
@@ -110,22 +110,28 @@ def userinput(request):
     # If this is a POST request then process the Form data
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request (binding):
-        form = UserInputForm(request.POST)
+        userinput_form = UserInputForm(request.POST)
+        AD_userinput_form = AD_UserInputForm(request.POST)
+        economic_userinput_form = Economic_UserInputForm(request.POST)
         
-        if form.is_valid():
+        if userinput_form.is_valid() and AD_userinput_form.is_valid() and economic_userinput_form.is_valid():
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             #UserInputData.user_budget = form.cleaned_data['user_budget']
             #UserInputData.product = form.cleaned_data['product']
             #UserInputData.manure_composition = form.cleaned_data['manure_composition']
             #UserInputData.user_budget = form.cleaned_data['user_budget']
             
-            UserInputData.facility_size = form.cleaned_data['facility_size']
-            UserInputData.AD_decision = form.cleaned_data['AD_decision']
-            UserInputData.biogas_product = form.cleaned_data['biogas_product']
-            UserInputData.latitude = form.cleaned_data['latitude']
-            UserInputData.longitude = form.cleaned_data['longitude']
-            UserInputData.discharge_mode = form.cleaned_data['discharge_mode']
-            UserInputData.discount_rate = form.cleaned_data['discount_rate']
+            UserInputData.number_DairyCow = userinput_form.cleaned_data['number_DairyCow']
+            UserInputData.number_DairyHeifer = userinput_form.cleaned_data['number_DairyHeifer']
+            UserInputData.number_DairyCalf = userinput_form.cleaned_data['number_DairyCalf']
+            UserInputData.number_BeefCow = userinput_form.cleaned_data['number_BeefCow']
+            UserInputData.number_BeefCalf = userinput_form.cleaned_data['number_BeefCalf']
+            UserInputData.latitude = userinput_form.cleaned_data['latitude']
+            UserInputData.longitude = userinput_form.cleaned_data['longitude']
+            #AD_UserInputData.AD_decision = form.cleaned_data['AD_decision']
+            #AD_UserInputData.biogas_product = form.cleaned_data['biogas_product']
+            #UserInputData.discharge_mode = userinput_form.cleaned_data['discharge_mode']
+            
             #results = main_function(form.cleaned_data['facility_size'])
             #Tech.title = results['AD_results']['tech']
             #Tech.investment_cost = results['AD_results']['AD_investment_cost']
@@ -135,24 +141,73 @@ def userinput(request):
             # redirect to a new URL
             # redirect to a new URL:
             #return HttpResponseRedirect(reverse('modeloutput') )
+            #return HttpResponseRedirect(reverse('resultsindex') )
+        
+        #AD_userinput_form = AD_UserInpuForm(request.POST)
+        #if AD_userinput_form.is_valid():
+
+            AD_UserInputData.AD_decision = AD_userinput_form.cleaned_data['AD_decision']
+            AD_UserInputData.biogas_product = AD_userinput_form.cleaned_data['biogas_product']
+            
+            Economic_UserInputData.customized_discount_rate = economic_userinput_form.cleaned_data['customized_discount_rate']
+            Economic_UserInputData.discount_rate = economic_userinput_form.cleaned_data['discount_rate']
+            Economic_UserInputData.RIN = economic_userinput_form.cleaned_data['RIN']
+            Economic_UserInputData.REC = economic_userinput_form.cleaned_data['REC']
+            Economic_UserInputData.Capital_Cost_incentive = economic_userinput_form.cleaned_data['Capital_Cost_incentive']
+
             return HttpResponseRedirect(reverse('resultsindex') )
 
     
     
     # If this is a GET (or any other method) create the default form.
     else:
-        form = UserInputForm(initial={'budget':0.0})
+        userinput_form = UserInputForm(initial={'budget':0.0})
+        AD_userinput_form = AD_UserInputForm
+        economic_userinput_form = Economic_UserInputForm
         
     context = {
-            'form':form,
+            'userinput_form':userinput_form,
+            'AD_userinput_form':AD_userinput_form,
+            'economic_userinput_form':economic_userinput_form,
     }
     
     return render (request, 'cereslibrary/user-input.html', context=context)
 
+def data_provided(request):
+    number_DairyCow = UserInputData.number_DairyCow
+    number_DairyHeifer = UserInputData.number_DairyHeifer
+    number_DairyCalf = UserInputData.number_DairyCalf
+    number_BeefCow = UserInputData.number_BeefCow
+    number_BeefCalf = UserInputData.number_BeefCalf
+    latitude = UserInputData.latitude
+    longitude = UserInputData.longitude
+    
+    AD_decision = AD_UserInputData.AD_decision
+    biogas_product = AD_UserInputData.biogas_product
+    
+    customized_discount_rate = Economic_UserInputData.customized_discount_rate
+    discount_rate = Economic_UserInputData.discount_rate
+    
+    context_data_provided = {
+    'number_DairyCow'           : number_DairyCow,
+    'number_DairyHeifer'           : number_DairyHeifer,
+    'number_DairyCalf'           : number_DairyCalf,
+    'number_BeefCow'           : number_BeefCow,
+    'number_BeefCalf'           : number_BeefCalf,
+    'latitude'                  : latitude,
+    'longitude'                 : longitude,
+    'customized_discount_rate'  : customized_discount_rate,
+    'discount_rate'             : discount_rate,
+    'AD_decision'               : AD_decision,
+    'biogas_product'            : biogas_product,
+    }
+    
+    return render(request, 'cereslibrary/data_provided.html', context=context_data_provided)
+
 def modeloutput(request):
     """View function for home page of site."""
     
-    results = main_function(UserInputData.facility_size, UserInputData.AD_decision)
+    results = main_function(UserInputData.number_DairyCow, UserInputData.AD_decision)
     
     #Model output
     #budget_output = UserInputData.user_budget
@@ -332,7 +387,7 @@ def modeloutput(request):
     return render(request, 'cereslibrary/modeloutput.html', context={**context_AD, **context_SP, **context_FI, **context_FBR, **context_CSTR})
 
 def designoutput(request):
-    results = main_function(UserInputData.facility_size, UserInputData.AD_decision)
+    results = main_function(UserInputData.number_DairyCow, UserInputData.AD_decision)
     
     #Screw Press
     tech_SP     = results['ScrewPress_results']['tech']
@@ -405,7 +460,7 @@ def resultsindex(request):
 
 def indicators(request):
     results_GIS = GIS_retrieval_module(UserInputData.latitude, UserInputData.longitude)
-    results = main_function(UserInputData.facility_size, UserInputData.AD_decision)
+    results = main_function(UserInputData.number_DairyCow, UserInputData.AD_decision)
     discharge_mode = UserInputData.discharge_mode
     
     #Summary of results
@@ -585,7 +640,7 @@ def indicators(request):
 
 def economic_eval(request):
     
-    results = main_function(UserInputData.facility_size, UserInputData.AD_decision)
+    results = main_function(UserInputData.number_DairyCow, UserInputData.AD_decision)
     discount_rate = UserInputData.discount_rate/100
     
     #economic_results_summary

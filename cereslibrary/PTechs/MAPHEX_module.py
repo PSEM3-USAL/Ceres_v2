@@ -18,14 +18,14 @@ Created on Wed Dec 19 09:15:46 2018
 # ===============================================================================================================================================================================================================================
 # ###############################################################################################################################################################################################################################
 # ==============================================================================================================================================================================================================================
-def MAPHEX_module(F_ini,fc_ini,x_ini):
+def MAPHEX_module(F_ini,fc_ini,x_ini, elements_wet, elements_dry, nutrients, feedstock_parameters):
     import pandas as pd
     import numpy as np
 
 
     # IMPORT MODULES
     from global_parameters_module import UnitConv, MW, c_p_liq_sol, dH_vap_0, Tc, Tb, dH_f, dH_c, c_p_v_1, c_p_v_2, c_p_v_3, c_p_v_4, coef_vapor_pressure_1, coef_vapor_pressure_2, coef_vapor_pressure_3, CEI, price, nu_p, k_p, n_watson, epsilon, T_amb, P_ref, density
-    from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
+    #from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
     from equipment_costs.MAPHEX_cost_module import MAPHEX_cost_module
     from economic_parameters_module import ec_param
     # ===============================================================================================================================================================================================================================

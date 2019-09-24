@@ -9,9 +9,9 @@ import pandas as pd
 #fc_MgCl2_in=0.2
 #fc_P_PO4_out=fc_P_PO4_in*0.1
 
-def CSTR_investment_cost (F_total, total_time, mixing_operation):
+def CSTR_investment_cost (F_total, total_time, mixing_operation,feedstock_parameters):
     from global_parameters_module import UnitConv, MW, c_p_liq_sol, dH_vap_0, Tc, Tb, dH_f, dH_c, c_p_v_1, c_p_v_2, c_p_v_3, c_p_v_4, coef_vapor_pressure_1, coef_vapor_pressure_2, coef_vapor_pressure_3, CEI, price, nu_p, k_p, n_watson, epsilon, T_amb, P_ref, density, latent_heat_evap, nat_gas_heat_value
-    from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
+    #from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters, elements_dry_comp
     from equipment_costs.vessel_design_cost import vessel_design_cost
     from equipment_costs.agitator_design_cost import agitator_design_cost
     
@@ -32,7 +32,7 @@ def CSTR_investment_cost (F_total, total_time, mixing_operation):
     #total_time              = reaction_time+growth_time#(s)
     
     #-------------------------Reactor vessel----------------------------------
-    vessel_results = vessel_design_cost(F_total, total_time)
+    vessel_results = vessel_design_cost(F_total, total_time,feedstock_parameters)
     vessel_V_total = vessel_results['Volume']
     #Results
     vessel_V = vessel_results['V_design']

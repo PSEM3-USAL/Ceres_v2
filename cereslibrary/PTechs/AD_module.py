@@ -24,11 +24,11 @@ pd.options.display.max_columns = 50
 # ===============================================================================================================================================================================================================================
 # ###############################################################################################################################################################################################################################
 # ===============================================================================================================================================================================================================================
-def AD_module(F_ini,fc_ini, x_ini, N_animals):
+def AD_module(F_ini,fc_ini, x_ini, N_animals, elements_wet, elements_dry, nutrients, feedstock_parameters):
         
     # IMPORT MODULES
     from global_parameters_module import UnitConv, MW, c_p_liq_sol, dH_vap_0, Tc, Tb, dH_f, dH_c, c_p_v_1, c_p_v_2, c_p_v_3, c_p_v_4, coef_vapor_pressure_1, coef_vapor_pressure_2, coef_vapor_pressure_3, CEI, price, nu_p, k_p, n_watson, epsilon, T_amb, P_ref, density, latent_heat_evap, nat_gas_heat_value
-    from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters
+    #from feedstock_input_module import elements_wet, elements_dry, nutrients, feedstock_parameters
     from equipment_costs.AD_cost_module import AD_cost_module
     
     # ===============================================================================================================================================================================================================================

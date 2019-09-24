@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Ceres Project</title>
+        <!-- Add additional CSS in static file -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    </head>
+    
+    <body>
+    
+        <header class="container group">
+            <section class="logoinst_row">
+                <div class="logoinst_row">
+                    <div class="logoinst_column">
+                        <img id="EPAlogo" src="{% static 'images/EPAlogo.png' %}" alt="EPA logo" style="height:100px">
+                    </div>
+                    <div class="logoinst_column">
+                        <img id="USALlogo" src="{% static 'images/USALlogo.png' %}" alt="USAL logo" style="height:110px">
+                    </div>
+                </div>
+            </section>
+            
+            <h1 class="logo">Ceres project</h1>
+            
+            <nav class="nav">
+                <a href="mailto:emartinher@usal.es?subject=Ceres%20Project">Contact</a>
+            </nav>
+        </header>
+        
+        <section class="hero" style="text-align:left;"> 
+            <div class="containerdarkblue">   
+                <h1>Data provided</h1>
+
+                <br/>
+                <h6>CAFO parameters</h6>
+                <p><strong>number_DairyCow:</strong> {{ number_DairyCow }}</p>
+                <p><strong>number_DairyHeifer:</strong> {{ number_DairyHeifer }}</p>
+                <p><strong>number_DairyCalf:</strong> {{ number_DairyCalf }}</p>
+                <p><strong>number_BeefCow:</strong> {{ number_BeefCow }}</p>
+                <p><strong>number_BeefCalf:</strong> {{ number_BeefCalf }}</p>
+                <p><strong>latitude:</strong> {{ latitude }}</p>
+                <p><strong>longitude:</strong> {{ longitude }}</p>
+                
+                <h6>Anaerobic digestion parameters</h6>
+                <p><strong>AD_decision:</strong> {{ AD_decision }}</p>
+                <p><strong>biogas_product:</strong> {{ biogas_product }}</p>
+                
+                <h6>Economic parameters</h6>
+                <p><strong>customized_discount_rate:</strong> {{ customized_discount_rate }}</p>
+                <p><strong>discount_rate:</strong> {{ discount_rate }}</p>
+            </div>
+        </section>
+                
+        <footer class="primary-footer">
+            <div class="container group">
+                <small>US Environmental Protection Agency</small> <br/>
+                <small>University of Salamanca</small>
+                
+                <nav class="nav">
+                    <a href="mailto:emartinher@usal.es?subject=Ceres%20Project">Contact</a>
+                </nav>
+            </div>
+        </footer>
+             
+
+    </body>
+</html>
+
